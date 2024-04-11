@@ -1,5 +1,6 @@
 package com.example.pawel.controller;
 
+import com.example.pawel.entities.Car;
 import com.example.pawel.model.CarDTO;
 import com.example.pawel.service.CarService;
 import lombok.RequiredArgsConstructor;
