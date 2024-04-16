@@ -41,6 +41,16 @@ public class User implements UserDetails{
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Availability> availabilities;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Schedule> schedules;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<DailyReport> dailyReports;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

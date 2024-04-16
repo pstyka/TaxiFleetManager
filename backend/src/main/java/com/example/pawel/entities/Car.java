@@ -10,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -45,4 +46,9 @@ public class Car {
     @Lob
     @Column(name = "image")
     private byte[] image;
+
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+    private List<Schedule> schedules;
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+    private List<DailyReport> dailyReports;
 }

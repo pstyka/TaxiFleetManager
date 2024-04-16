@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProfileController {
 
     private static final String PROFILE_PATH = "/api/v1/profile";
+    //private final ProfileService profileService;
 
-    @GetMapping(value = PROFILE_PATH)
-    public ResponseEntity getProfile() {
-        return null;
-    }
+//    @GetMapping(value = PROFILE_PATH)
+//    public void getProfile() {
+//        return profileService.getProfile();
+//    }
 }
