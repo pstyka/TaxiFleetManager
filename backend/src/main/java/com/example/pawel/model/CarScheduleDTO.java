@@ -5,17 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-import java.util.UUID;
+import java.util.List;
 
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ScheduleDTO {
-    private UUID userId;
-    private UUID carId;
-    private Date date;
-    private String day;
-    private String shift;
+public class CarScheduleDTO {
+    private String registrationNumber;
+    private String brand;
+    private String model;
+    private List<ScheduleDetailsDTO> scheduleDTOS;
 }
