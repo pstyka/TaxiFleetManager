@@ -6,16 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.UUID;
 
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ScheduleDTO {
-    private UUID userId;
-    private UUID carId;
-    private Date date;
+public class ScheduleDetailsDTO {
+    private String firstName;
+    private String lastName;
     private String day;
+    private String date;
     private String shift;
 }
