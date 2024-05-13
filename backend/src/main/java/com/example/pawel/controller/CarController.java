@@ -3,6 +3,10 @@ package com.example.pawel.controller;
 import com.example.pawel.entities.Car;
 import com.example.pawel.model.CarDTO;
 import com.example.pawel.service.CarService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -17,11 +21,22 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name="Car")
 public class CarController {
     private static final String CAR_PATH = "/api/v1/car";
     private static final String CAR_PATH_ID = CAR_PATH + "/{carId}";
     private final CarService carService;
 
+    @Operation(
+            summary = "Get all cars",
+            description = "Get all cars from the database",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "List of cars"),
+                    @ApiResponse(responseCode = "403", description = "Unauthorized")
+
+            }
+
+    )
     @GetMapping(value = CAR_PATH)
     public List<CarDTO> getCars(){
         return carService.getCars();
