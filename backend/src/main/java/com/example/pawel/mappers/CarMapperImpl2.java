@@ -28,7 +28,7 @@ public class CarMapperImpl2 implements CarMapper {
                 .productionYear(car.getProductionYear())
                 .mileage(car.getMileage())
                 .wheelState(car.getWheelState())
-                .image(car.getImage())
+                .imageUrl(car.getImageUrl())
                 .build();
     }
 }

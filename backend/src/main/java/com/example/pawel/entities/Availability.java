@@ -9,6 +9,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -24,32 +26,26 @@ public class Availability {
     @JdbcTypeCode(SqlTypes.CHAR)
     @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
     private UUID id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-    @Column(name="week")
+
+    @Column(name = "week")
     private Integer week;
-    @Enumerated(value = EnumType.STRING)
-    @Column(name="monday")
-    private Shift monday;
-    @Enumerated(value = EnumType.STRING)
-    @Column(name="tuesday")
-    private Shift tuesday;
-    @Enumerated(value = EnumType.STRING)
-    @Column(name="wednesday")
-    private Shift wednesday;
-    @Enumerated(value = EnumType.STRING)
-    @Column(name="thursday")
-    private Shift thursday;
-    @Enumerated(value = EnumType.STRING)
-    @Column(name="friday")
-    private Shift friday;
-    @Enumerated(value = EnumType.STRING)
-    @Column(name="saturday")
-    private Shift saturday;
-    @Enumerated(value = EnumType.STRING)
-    @Column(name="sunday")
-    private Shift sunday;
 
+    @ElementCollection
+    @CollectionTable(name = "day_availability", joinColumns = @JoinColumn(name = "availability_id"))
+    private List<DayAvailability> days;
 
+    @Embeddable
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class DayAvailability {
+        private String day;
+        @Enumerated(EnumType.STRING)
+        private Shift shift;
+        private LocalDate date;
+    }
 }

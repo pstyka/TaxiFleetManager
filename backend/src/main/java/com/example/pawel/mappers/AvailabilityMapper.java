@@ -4,22 +4,29 @@ import com.example.pawel.entities.Availability;
 import com.example.pawel.entities.User;
 import com.example.pawel.model.AvailabilityDTO;
 import com.example.pawel.repository.UserRepository;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Mapper(componentModel = "spring")
-public interface AvailabilityMapper {
+public abstract class AvailabilityMapper {
 
-    @Mapping(source = "userId", target = "user", qualifiedByName = "userIdToUser")
-    Availability availabilityDTOToAvailability(AvailabilityDTO availabilityDTO, @Context UserRepository userRepository);
+    @Autowired
+    private UserRepository userRepository;
 
     @Mapping(source = "user.id", target = "userId")
-    AvailabilityDTO availabilityToAvailabilityDTO(Availability availability);
+    public abstract AvailabilityDTO availabilityToAvailabilityDTO(Availability availability);
 
-    @Named("userIdToUser")
-    default User userIdToUser(UUID userId, @Context UserRepository userRepository) {
-        return userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User with id " + userId + " not found"));
+    @Mapping(source = "userId", target = "user", qualifiedByName = "userFromId")
+    public abstract Availability availabilityDTOToAvailability(AvailabilityDTO availabilityDTO);
+
+    @Named("userFromId")
+    protected User userFromId(UUID userId) {
+        return userRepository.findById(userId).orElse(null);
     }
 }
