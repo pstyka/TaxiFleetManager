@@ -1,0 +1,3 @@
+[submodule "https:/github.com/pstyka/TaxiFleetManager-Client"]
+	path = https:/github.com/pstyka/TaxiFleetManager-Client
+	url = https://github.com/pstyka/TaxiFleetManager
