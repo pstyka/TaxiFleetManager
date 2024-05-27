@@ -21,7 +21,6 @@ public class AvailabilityServiceImpl implements AvailabilityService {
 
     @Override
     public List<AvailabilityDTO> getAvailability() {
-
         return availabilityRepository.findAll()
                 .stream()
                 .map(availabilityMapper::availabilityToAvailabilityDTO)
@@ -31,7 +30,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     @Override
     @Transactional
     public AvailabilityDTO saveNewAvailability(AvailabilityDTO availabilityDTO) {
-        Availability availability = availabilityMapper.availabilityDTOToAvailability(availabilityDTO, userRepository);
+        Availability availability = availabilityMapper.availabilityDTOToAvailability(availabilityDTO);
         Availability savedAvailability = availabilityRepository.save(availability);
         return availabilityMapper.availabilityToAvailabilityDTO(savedAvailability);
     }

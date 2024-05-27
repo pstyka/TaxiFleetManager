@@ -2,6 +2,7 @@ package com.example.pawel.controller;
 
 import com.example.pawel.model.UserDTO;
 import com.example.pawel.service.DriverService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name="Driver")
 public class DriverController {
     private static final String DRIVER_PATH = "/api/v1/driver";
     private static final String DRIVER_PATH_ID = DRIVER_PATH + "/{driverId}";

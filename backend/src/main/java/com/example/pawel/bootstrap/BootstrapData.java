@@ -26,10 +26,6 @@ public class BootstrapData implements CommandLineRunner {
     }
 
     private void loadCars() throws IOException {
-        File imageFile = ResourceUtils.getFile("classpath:static/images/toyota_black.png");
-        byte[] imageByte = Files.readAllBytes(imageFile.toPath());
-        File imageFile2 = ResourceUtils.getFile("classpath:static/images/toyota_white.png");
-        byte[] imageByte2 = Files.readAllBytes(imageFile.toPath());
         if(carRepository.count()==0){
             Car c1 = Car.builder()
                     .brand("Toyota")
@@ -39,7 +35,7 @@ public class BootstrapData implements CommandLineRunner {
                     .productionYear("2023")
                     .mileage(55654)
                     .wheelState(WheelState.GOOD)
-                    .image(imageByte)
+                    .imageUrl("https://toyotamauritius.com/sites/default/files/models/colors/Black.png")
                     .build();
             Car c2 = Car.builder()
                     .brand("Toyota")
@@ -49,7 +45,7 @@ public class BootstrapData implements CommandLineRunner {
                     .productionYear("2022")
                     .mileage(76543)
                     .wheelState(WheelState.MEDIUM)
-                    .image(imageByte2)
+                    .imageUrl("https://toyotamauritius.com/sites/default/files/models/colors/1.png")
                     .build();
             Car c3 = Car.builder()
                     .brand("Toyota")
@@ -59,7 +55,7 @@ public class BootstrapData implements CommandLineRunner {
                     .productionYear("2022")
                     .mileage(5433)
                     .wheelState(WheelState.GOOD)
-                    .image(imageByte2)
+                    .imageUrl("https://toyotamauritius.com/sites/default/files/models/colors/1.png")
                     .build();
             carRepository.save(c1);
             carRepository.save(c2);

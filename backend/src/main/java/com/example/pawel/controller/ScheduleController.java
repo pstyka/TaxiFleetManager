@@ -5,6 +5,7 @@ import com.example.pawel.model.CarScheduleDTO;
 import com.example.pawel.model.ScheduleDTO;
 import com.example.pawel.service.CarScheduleService;
 import com.example.pawel.service.ScheduleService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +22,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name="Schedule")
 public class ScheduleController {
 
     private final ScheduleService scheduleService;

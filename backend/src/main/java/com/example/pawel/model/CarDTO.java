@@ -30,6 +30,6 @@ public class CarDTO {
     private Integer mileage;
     @NotNull
     private WheelState wheelState;
-    private byte[] image;
+    private String imageUrl;
 
 }

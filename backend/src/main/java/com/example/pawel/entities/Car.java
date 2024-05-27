@@ -43,9 +43,9 @@ public class Car {
     @Column(name = "wheel_state")
     @Enumerated(value = EnumType.STRING)
     private WheelState wheelState;
-    @Lob
-    @Column(name = "image")
-    private byte[] image;
+    @Column(name = "image_url")
+    private String imageUrl;
+
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private List<Schedule> schedules;

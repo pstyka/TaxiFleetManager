@@ -3,6 +3,7 @@ package com.example.pawel.controller;
 import com.example.pawel.config.JwtService;
 import com.example.pawel.model.AvailabilityDTO;
 import com.example.pawel.service.AvailabilityService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name="Availability")
 public class AvailabilityController {
 
     private static final String AVAILABILITY_PATH = "/api/v1/availability";

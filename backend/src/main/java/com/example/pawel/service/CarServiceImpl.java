@@ -52,7 +52,7 @@ public class CarServiceImpl implements CarService {
             foundCar.setProductionYear(carDTO.getProductionYear());
             foundCar.setMileage(carDTO.getMileage());
             foundCar.setWheelState(carDTO.getWheelState());
-            foundCar.setImage(carDTO.getImage());
+            foundCar.setImageUrl(carDTO.getImageUrl());
             atomicReference
                     .set(Optional.of(carMapper.carToCarDTO(carRepository.save(foundCar))));
         }, () -> {
@@ -96,8 +96,8 @@ public class CarServiceImpl implements CarService {
             if (carDTO.getWheelState() != null){
                 foundCar.setWheelState(carDTO.getWheelState());
             }
-            if (carDTO.getImage() != null){
-                foundCar.setImage(carDTO.getImage());
+            if (carDTO.getImageUrl() != null){
+                foundCar.setImageUrl(carDTO.getImageUrl());
             }
             atomicReference.set(Optional.of(carMapper.carToCarDTO(carRepository.save(foundCar))));
         }, () -> {
