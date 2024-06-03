@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface DriverService {
-    List<UserDTO> getDrivers();
+    List<UserDTO> getDrivers(String name, String lastName);
     
     UserDTO getDriverById(UUID driverId);
 

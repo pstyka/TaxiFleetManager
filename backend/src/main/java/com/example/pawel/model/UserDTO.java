@@ -21,7 +21,10 @@ public class UserDTO {
     @NotNull
     private String lastName;
     @NotNull
+    private String phoneNumber;
+    @NotNull
     private Role role;
+    private String imgUrl;
 
 
 }

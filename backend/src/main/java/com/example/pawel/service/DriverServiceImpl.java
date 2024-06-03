@@ -18,13 +18,26 @@ public class DriverServiceImpl implements DriverService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-    @Override
-    public List<UserDTO> getDrivers() {
-        return userRepository
-                .findAll()
-                .stream()
-                .map(userMapper::userToUserDTO)
-                .collect(Collectors.toList());
+
+
+    public List<UserDTO> getDrivers(String firstName, String lastName) {
+        if (firstName != null && lastName != null) {
+            return userRepository.findAllByFirstNameIsLikeIgnoreCaseAndLastNameIsLikeIgnoreCase(firstName, lastName).stream()
+                    .map(userMapper::userToUserDTO)
+                    .collect(Collectors.toList());
+        } else if (firstName != null) {
+            return userRepository.findAllByFirstNameIsLikeIgnoreCase(firstName).stream()
+                    .map(userMapper::userToUserDTO)
+                    .collect(Collectors.toList());
+        } else if (lastName != null) {
+            return userRepository.findAllByLastNameIsLikeIgnoreCase(lastName).stream()
+                    .map(userMapper::userToUserDTO)
+                    .collect(Collectors.toList());
+        } else {
+            return userRepository.findAll().stream()
+                    .map(userMapper::userToUserDTO)
+                    .collect(Collectors.toList());
+        }
     }
 
     @Override

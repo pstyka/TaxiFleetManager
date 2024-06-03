@@ -23,9 +23,13 @@ public class DriverController {
     private final DriverService driverService;
 
     @GetMapping(value = DRIVER_PATH)
-    public List<UserDTO> getDrivers(){
-        return driverService.getDrivers();
+    public List<UserDTO> getDrivers(@RequestParam(required = false) String firstName,
+                                    @RequestParam(required = false) String lastName) {
+        return driverService.getDrivers(firstName, lastName);
     }
+
+
+
     @GetMapping(value = DRIVER_PATH_ID)
     public UserDTO getDriverById(@PathVariable("driverId") UUID driverId){
         return driverService.getDriverById(driverId);

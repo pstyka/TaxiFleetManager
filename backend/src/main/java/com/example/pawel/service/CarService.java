@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CarService {
-    List<CarDTO> getCars();
+    List<CarDTO> getCars(String brand, String model, String registrationNumber);
     Optional<CarDTO> getCarById(UUID carId);
 
     CarDTO saveNewCar(CarDTO carDTO);

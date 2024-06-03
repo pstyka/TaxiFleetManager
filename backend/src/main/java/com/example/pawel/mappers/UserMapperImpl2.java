@@ -10,7 +10,18 @@ import org.springframework.stereotype.Component;
 public class UserMapperImpl2 implements UserMapper {
     @Override
     public User userDTOToUser(UserDTO userDTO) {
-        return null;
+        if(userDTO == null) {
+            return null;
+        }
+        return User.builder()
+                .id(userDTO.getId())
+                .firstName(userDTO.getFirstName())
+                .lastName(userDTO.getLastName())
+                .phoneNumber(userDTO.getPhoneNumber())
+                .role(userDTO.getRole())
+                .imgUrl(userDTO.getImgUrl())
+                .build();
+
     }
 
     @Override
@@ -22,7 +33,9 @@ public class UserMapperImpl2 implements UserMapper {
                 .id(user.getId())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
+                .phoneNumber(user.getPhoneNumber())
                 .role(user.getRole())
+                .imgUrl(user.getImgUrl())
                 .build();
     }
 }

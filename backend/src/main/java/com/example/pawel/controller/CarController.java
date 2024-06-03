@@ -36,8 +36,10 @@ public class CarController {
             }
     )
     @GetMapping(value = CAR_PATH)
-    public List<CarDTO> getCars(){
-        return carService.getCars();
+    public List<CarDTO> getCars(@RequestParam(required = false) String brand,
+                                @RequestParam(required = false) String model,
+                                @RequestParam(required = false) String registrationNumber) {
+        return carService.getCars(brand, model, registrationNumber);
     }
 
     @Operation(
@@ -68,6 +70,7 @@ public class CarController {
                 CAR_PATH + "/" + savedCar.getId().toString());
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
+
     @Operation(
             summary = "Update car by ID",
             description = "",

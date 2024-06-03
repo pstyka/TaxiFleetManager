@@ -1,5 +1,6 @@
 package com.example.pawel.service;
 
+import com.example.pawel.entities.Car;
 import com.example.pawel.mappers.CarMapper;
 import com.example.pawel.model.CarDTO;
 import com.example.pawel.repository.CarRepository;
@@ -20,9 +21,28 @@ public class CarServiceImpl implements CarService {
     private final CarRepository carRepository;
     private final CarMapper carMapper;
     @Override
-    public List<CarDTO> getCars() {
-        return carRepository.findAll()
-                .stream()
+    public List<CarDTO> getCars(String brand, String model, String registrationNumber) {
+        List<Car> cars;
+
+        if (brand != null && model != null && registrationNumber != null) {
+            cars = carRepository.findAllByBrandIsLikeIgnoreCaseAndModelIsLikeIgnoreCaseAndRegistrationNumberIsLikeIgnoreCase(brand, model, registrationNumber);
+        } else if (brand != null && model != null) {
+            cars = carRepository.findAllByBrandIsLikeIgnoreCaseAndModelIsLikeIgnoreCase(brand, model);
+        } else if (brand != null && registrationNumber != null) {
+            cars = carRepository.findAllByBrandIsLikeIgnoreCaseAndRegistrationNumberIsLikeIgnoreCase(brand, registrationNumber);
+        } else if (model != null && registrationNumber != null) {
+            cars = carRepository.findAllByModelIsLikeIgnoreCaseAndRegistrationNumberIsLikeIgnoreCase(model, registrationNumber);
+        } else if (brand != null) {
+            cars = carRepository.findAllByBrandIsLikeIgnoreCase(brand);
+        } else if (model != null) {
+            cars = carRepository.findAllByModelIsLikeIgnoreCase(model);
+        } else if (registrationNumber != null) {
+            cars = carRepository.findAllByRegistrationNumberIsLikeIgnoreCase(registrationNumber);
+        } else {
+            cars = carRepository.findAll();
+        }
+
+        return cars.stream()
                 .map(carMapper::carToCarDTO)
                 .collect(Collectors.toList());
     }
@@ -35,10 +55,11 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarDTO saveNewCar(CarDTO carDTO) {
-        return carMapper
-                .carToCarDTO(carRepository
-                        .save(carMapper
-                                .carDTOToCar(carDTO)));
+        System.out.println("Received CarDTO: " + carDTO); // Debugowanie
+        Car car = carMapper.carDTOToCar(carDTO);
+        System.out.println("Mapped Car entity: " + car); // Debugowanie
+        Car savedCar = carRepository.save(car);
+        return carMapper.carToCarDTO(savedCar);
     }
 
     @Override

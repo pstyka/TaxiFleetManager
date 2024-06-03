@@ -10,7 +10,23 @@ import org.springframework.stereotype.Component;
 public class CarMapperImpl2 implements CarMapper {
     @Override
     public Car carDTOToCar(CarDTO carDTO) {
-        return null;
+        if (carDTO == null) {
+            return null;
+        }
+
+        Car.CarBuilder car = Car.builder();
+
+        car.id(carDTO.getId());
+        car.brand(carDTO.getBrand());
+        car.model(carDTO.getModel());
+        car.color(carDTO.getColor());
+        car.registrationNumber(carDTO.getRegistrationNumber());
+        car.productionYear(carDTO.getProductionYear());
+        car.mileage(carDTO.getMileage());
+        car.wheelState(carDTO.getWheelState());
+        car.imageUrl(carDTO.getImageUrl());
+
+        return car.build();
     }
 
     @Override
@@ -32,3 +48,4 @@ public class CarMapperImpl2 implements CarMapper {
                 .build();
     }
 }
+
